@@ -1,10 +1,21 @@
 import React, {Component} from 'react';
 import Article from './Article';
 import OneOpen from '../decorators/oneOpen';
+import Select from 'react-select';
+import 'react-select/dist/react-select.min.css';
 
 class ArticleList extends Component{
 
+    state={
+        selectedArticles: null
+    };
 
+    handleSelectChange=(selectedArticles)=>{
+        console.log(selectedArticles);
+        this.setState({
+            selectedArticles
+        })
+    };
 
     render() {
         const {articles,openArticleId,openArticle}=this.props;
@@ -14,9 +25,19 @@ class ArticleList extends Component{
             openArticle={openArticle(article.id)}
             />
         </li>);
+        const options=articles.map((article)=>({
+            label: article.title,
+            value: article.id
+        }));
+
         return(
             <div>
                 <h1>Article list</h1>
+                <Select
+                    options={options}
+                    value={this.state.selectedArticles}
+                    onChange={this.handleSelectChange}
+                />
                 <ul>
                     {listItems}
                 </ul>
@@ -24,4 +45,4 @@ class ArticleList extends Component{
         )
     }
 }
-export default OneOpen(ArticleList)
+export default OneOpen(ArticleList);
