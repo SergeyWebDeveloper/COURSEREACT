@@ -4,6 +4,13 @@ import toggleOpen from '../decorators/toggleOpen';
 
 class CommentList extends Component{
 
+    // componentWillMount(){
+    //     console.log(this.props)
+    // }
+    // componentDidMount(){
+    //     console.log('mounted')
+    // }
+
     render(){
         const {comments,isOpen,toggleOpen}=this.props;
         if(typeof comments!=='object') return <h3>no comments yet</h3>
